@@ -1,0 +1,63 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CustomDateTimeApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Please enter current date (format dd.mm.yyyy)");
+            string date = Console.ReadLine();
+
+            
+            Console.WriteLine("Please enter day to add or subtract");
+            int day = Convert.ToInt32(Console.ReadLine());
+
+
+            int index = date.IndexOf(".");
+
+            int d = Convert.ToInt32( date.Substring(0, index));
+
+            int m = Convert.ToInt32(date.Substring(index + 1, date.IndexOf('.',index)));
+
+            int y = Convert.ToInt32(date.Substring(date.LastIndexOf(".")+1, 4));
+
+            int rs = day + d;
+            //45+20 = 65
+            if (rs > 30)
+            {
+                d = rs % 30;//45 %30 =15
+                int month = Convert.ToInt32(Math.Ceiling((decimal)(rs / 30)));
+
+
+
+                m += month;
+
+                if (m > 12)
+                {
+                    int monthPart = m % 12;
+
+                    int yPart = Convert.ToInt32(Math.Ceiling((decimal)(m / 12)));
+                    m = monthPart;
+
+                    y += yPart;
+                }
+                
+
+
+              
+            }
+            else
+                d = rs;
+            Console.WriteLine(d + "." + m + "." + y);
+
+            Console.ReadLine();
+
+
+        }
+    }
+}
